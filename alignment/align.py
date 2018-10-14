@@ -9,6 +9,7 @@
 
 import numpy as np
 import argparse
+import sys
 from utils import *
 
 parser = argparse.ArgumentParser(description='RCSLS for supervised word alignment')
@@ -141,4 +142,7 @@ if params.output != "":
     x = np.dot(x_full, R.T)
     x /= np.linalg.norm(x, axis=1)[:, np.newaxis] + 1e-8
     save_vectors(params.output, x, words_full)
+    if params.center:
+        words_full, x_full = load_vectors(params.tgt_emb, maxload=-1, center=params.center, verbose=False)
+        save_vectors(params.output + "-tgt", x_full, words_full)
     save_matrix(params.output + "-mat",  R)

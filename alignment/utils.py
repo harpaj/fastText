@@ -100,7 +100,7 @@ def load_pairs(filename, idx_src, idx_tgt, verbose=True):
     pairs = []
     tot = 0
     for line in f:
-        a, b = line.rstrip().split(' ')
+        a, b = line.rstrip().split('\t')
         tot += 1
         if a in idx_src and b in idx_tgt:
             pairs.append((idx_src[a], idx_tgt[b]))
